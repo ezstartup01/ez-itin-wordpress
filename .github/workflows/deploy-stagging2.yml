@@ -1,0 +1,88 @@
+name: Deploy custom WordPress code to stagging2
+
+on:
+  push:
+    branches:
+      - staging
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ez-itin-stagging2-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to existing staging only
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out managed code
+        uses: actions/checkout@v4
+
+      - name: Load SiteGround SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SITEGROUND_SSH_KEY }}
+          ssh-passphrase: ${{ secrets.SITEGROUND_SSH_KEY_PASSPHRASE }}
+
+      - name: Trust SiteGround host
+        env:
+          SITEGROUND_HOST: ${{ secrets.SITEGROUND_HOST }}
+          SITEGROUND_PORT: ${{ secrets.SITEGROUND_PORT }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          ssh-keyscan -p "$SITEGROUND_PORT" "$SITEGROUND_HOST" >> "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Validate exact staging target
+        env:
+          SITEGROUND_HOST: ${{ secrets.SITEGROUND_HOST }}
+          SITEGROUND_USER: ${{ secrets.SITEGROUND_USER }}
+          SITEGROUND_PORT: ${{ secrets.SITEGROUND_PORT }}
+          SITEGROUND_STAGING_PATH: ${{ secrets.SITEGROUND_STAGING_PATH }}
+        run: |
+          set -euo pipefail
+          TARGET="${SITEGROUND_STAGING_PATH%/}"
+          test "$TARGET" = "/home/customer/www/staging2.ez-itin.com/public_html"
+          case "$TARGET" in
+            "/home/customer/www/staging2.ez-itin.com/public_html") ;;
+            *) echo "Refusing unexpected deployment target"; exit 1 ;;
+          esac
+          ssh -p "$SITEGROUND_PORT" -o BatchMode=yes "$SITEGROUND_USER@$SITEGROUND_HOST" \
+            "test -d '$TARGET/wp-content/themes' && test -d '$TARGET/wp-content/plugins'"
+
+      - name: Deploy managed themes and plugins without deleting server files
+        env:
+          SITEGROUND_HOST: ${{ secrets.SITEGROUND_HOST }}
+          SITEGROUND_USER: ${{ secrets.SITEGROUND_USER }}
+          SITEGROUND_PORT: ${{ secrets.SITEGROUND_PORT }}
+          SITEGROUND_STAGING_PATH: ${{ secrets.SITEGROUND_STAGING_PATH }}
+        run: |
+          set -euo pipefail
+          TARGET="${SITEGROUND_STAGING_PATH%/}"
+          RSYNC_SSH="ssh -p $SITEGROUND_PORT -o BatchMode=yes"
+          for component in themes plugins; do
+            if [ -d "wp-content/$component" ]; then
+              rsync -az --human-readable --itemize-changes \
+                --exclude='uploads/' --exclude='cache/' --exclude='upgrade/' \
+                -e "$RSYNC_SSH" \
+                "wp-content/$component/" \
+                "$SITEGROUND_USER@$SITEGROUND_HOST:$TARGET/wp-content/$component/"
+            fi
+          done
+
+      - name: Verify staging WordPress after deployment
+        env:
+          SITEGROUND_HOST: ${{ secrets.SITEGROUND_HOST }}
+          SITEGROUND_USER: ${{ secrets.SITEGROUND_USER }}
+          SITEGROUND_PORT: ${{ secrets.SITEGROUND_PORT }}
+          SITEGROUND_STAGING_PATH: ${{ secrets.SITEGROUND_STAGING_PATH }}
+        run: |
+          set -euo pipefail
+          TARGET="${SITEGROUND_STAGING_PATH%/}"
+          ssh -p "$SITEGROUND_PORT" -o BatchMode=yes "$SITEGROUND_USER@$SITEGROUND_HOST" \
+            "cd '$TARGET' && wp --info && wp core version && wp option get home && wp option get siteurl && wp theme list && wp plugin list"
+
