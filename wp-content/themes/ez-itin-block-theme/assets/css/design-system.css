@@ -305,3 +305,55 @@ section[id] { scroll-margin-top: 7rem; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto!important; transition-duration: .01ms!important; animation-duration: .01ms!important; animation-iteration-count: 1!important; }
 }
+
+
+/* Homepage visual refinement: readable typography, purposeful icons, stronger SaaS sections */
+body.home > .wp-site-blocks { margin-block-start: -24px !important; }
+.ez-nav { min-height: 72px; }
+.ez-icon-svg { display: block; width: 1.75rem; height: 1.75rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ez-seo-hero h1 { max-width: 720px; font-size: clamp(3rem,4.3vw,4rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.035; text-wrap: balance; }
+.ez-home-seo h2 { max-width: 820px; font-size: clamp(2rem,3.3vw,3.25rem); letter-spacing: -.035em; line-height: 1.08; text-wrap: balance; }
+
+#services { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(circle at 92% 8%,rgba(61,183,233,.13),transparent 28rem),linear-gradient(180deg,#fff 0%,#f7fbff 100%); }
+#services::before { content: ""; position: absolute; z-index: -1; top: 3rem; right: -8rem; width: 24rem; height: 24rem; border: 1px solid rgba(21,94,239,.09); border-radius: 50%; box-shadow: 0 0 0 4rem rgba(21,94,239,.025),0 0 0 8rem rgba(61,183,233,.018); }
+.ez-seo-card-grid--four { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.25rem; }
+.ez-seo-card { position: relative; display: grid; min-height: 0; grid-template-columns: 4rem minmax(0,1fr); align-content: start; gap: 0 1.25rem; overflow: hidden; padding: 2rem; border-color: #d5e4f3; border-radius: 22px; background: rgba(255,255,255,.94); box-shadow: 0 18px 44px rgba(13,58,104,.075); transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.ez-seo-card::after { content: ""; position: absolute; top: -3rem; right: -3rem; width: 8rem; height: 8rem; border-radius: 50%; background: radial-gradient(circle,rgba(61,183,233,.12),transparent 68%); pointer-events: none; }
+.ez-seo-card:hover { border-color: #9fc5ef; box-shadow: 0 22px 54px rgba(13,58,104,.12); transform: translateY(-3px); }
+.ez-seo-card__icon { grid-row: 1 / span 2; display: grid; width: 4rem; height: 4rem; place-items: center; border: 1px solid #c9dcf6; border-radius: 18px; background: linear-gradient(145deg,#edf5ff,#ddebff); color: #155eef; box-shadow: inset 0 1px 0 #fff; }
+.ez-seo-card:nth-child(2) .ez-seo-card__icon { border-color: #bae8e4; background: linear-gradient(145deg,#ecfffc,#d7f8f4); color: #087f77; }
+.ez-seo-card:nth-child(3) .ez-seo-card__icon { border-color: #cfc9fa; background: linear-gradient(145deg,#f5f2ff,#e8e2ff); color: #5b45c6; }
+.ez-seo-card:nth-child(4) .ez-seo-card__icon { border-color: #f4d4b3; background: linear-gradient(145deg,#fff8ed,#ffecd4); color: #ad5b10; }
+.ez-seo-card h3 { grid-column: 2; margin: .15rem 0 .65rem; font-size: 1.2rem; line-height: 1.25; }
+.ez-seo-card p { grid-column: 2; font-size: .91rem; line-height: 1.72; }
+
+#who-we-help { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(circle at 0 42%,rgba(21,94,239,.08),transparent 26rem),#f3f8fd; }
+#who-we-help::after { content: ""; position: absolute; z-index: -1; right: 4%; bottom: 3rem; width: 10rem; height: 10rem; opacity: .35; background-image: radial-gradient(#74aee8 1.2px,transparent 1.2px); background-size: 14px 14px; }
+.ez-seo-audience-grid { gap: 1.25rem; }
+.ez-seo-audience-grid article { position: relative; min-height: 285px; overflow: hidden; padding: 1.85rem; border-color: #d4e2f1; border-radius: 22px; background: rgba(255,255,255,.96); box-shadow: 0 15px 38px rgba(16,57,95,.065); transition: transform .2s ease,box-shadow .2s ease; }
+.ez-seo-audience-grid article::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 4px; background: linear-gradient(90deg,#155eef,#4de0d3); }
+.ez-seo-audience-grid article:hover { box-shadow: 0 22px 48px rgba(16,57,95,.11); transform: translateY(-4px); }
+.ez-seo-audience-grid article > span { display: grid; width: 3.6rem; height: 3.6rem; padding: 0; place-items: center; border: 1px solid #c7dcf4; border-radius: 17px; background: linear-gradient(145deg,#eaf4ff,#dcecff); color: #155eef; box-shadow: 0 8px 20px rgba(21,94,239,.1); }
+.ez-seo-audience-grid article:nth-child(2) > span,.ez-seo-audience-grid article:nth-child(5) > span { border-color: #bce6e3; background: linear-gradient(145deg,#ebfffc,#daf7f4); color: #087f77; }
+.ez-seo-audience-grid article:nth-child(3) > span,.ez-seo-audience-grid article:nth-child(6) > span { border-color: #d2cef5; background: linear-gradient(145deg,#f5f3ff,#e9e5ff); color: #5b45c6; }
+.ez-seo-audience-grid h3 { margin: 1.35rem 0 .65rem; font-size: 1.16rem; line-height: 1.3; }
+.ez-seo-audience-grid p { font-size: .89rem; line-height: 1.72; }
+
+.ez-seo-resource-grid a { overflow: hidden; border-radius: 22px; background: linear-gradient(155deg,#fff 55%,#f2f7ff); }
+.ez-seo-resource-grid a::before { content: ""; position: absolute; top: -2rem; right: -2rem; width: 6rem; height: 6rem; border-radius: 50%; background: rgba(21,94,239,.055); }
+.ez-seo-resource-grid b { display: grid; width: 2.35rem; height: 2.35rem; place-items: center; border-radius: 50%; background: #e7f0ff; }
+
+@media (max-width: 900px) {
+  .ez-seo-card-grid--four { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  body.home > .wp-site-blocks { margin-block-start: -24px !important; }
+  .ez-seo-hero h1 { font-size: clamp(2.25rem,9.4vw,3rem); letter-spacing: -.018em; line-height: 1.06; }
+  .ez-home-seo h2 { font-size: clamp(1.9rem,8.2vw,2.65rem); letter-spacing: -.025em; }
+  .ez-seo-card { grid-template-columns: 3.5rem minmax(0,1fr); gap: 0 1rem; padding: 1.4rem; }
+  .ez-seo-card__icon { width: 3.5rem; height: 3.5rem; border-radius: 15px; }
+  .ez-seo-card h3 { font-size: 1.08rem; }
+  .ez-seo-card p { font-size: .86rem; }
+  .ez-seo-audience-grid article { min-height: 0; padding: 1.5rem; }
+  .ez-seo-audience-grid article > span { width: 3.25rem; height: 3.25rem; }
+}
