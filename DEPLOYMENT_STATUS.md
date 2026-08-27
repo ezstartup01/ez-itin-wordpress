@@ -29,5 +29,5 @@ WordPress core, uploads, caches, backups, logs, database dumps, credentials, pri
 - Current staging custom theme synchronized locally from the deployed staging theme.
 - SiteGround SSH deployment key created as `ezitin-cli`; private material is stored only as an encrypted GitHub Actions secret.
 - Repository secrets configured for the SiteGround connection and exact staging path.
-- Safe deployment test and post-deployment WP-CLI verification remain to be run after the `staging` branch is created.
-
+- SSH key and configured passphrase were replaced with a matching pair after the initial deployment-key validation failure.
+- Documentation-only staging commit triggered the safe deployment and post-deployment WP-CLI verification test on August 27, 2026.
