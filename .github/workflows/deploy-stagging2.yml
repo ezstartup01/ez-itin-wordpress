@@ -118,6 +118,7 @@ jobs:
             PAGE_FILE="$RUNNER_TEMP/staging-home-${ATTEMPT}.html"
             curl --fail --silent --show-error --location --max-time 30 \
               -H 'Cache-Control: no-cache' \
+              -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/138.0 Safari/537.36' \
               --output "$PAGE_FILE" \
               "https://staging2.ez-itin.com/?deploy=${GITHUB_SHA}-${ATTEMPT}"
             if grep -Fq 'ITIN Application Assistance' "$PAGE_FILE" \
@@ -127,5 +128,7 @@ jobs:
             fi
             sleep 5
           done
+          echo "Downloaded $(wc -c < "$PAGE_FILE") bytes from staging."
+          sed -n 's:.*<title>\([^<]*\)</title>.*:Response title: \1:p' "$PAGE_FILE" | head -n 1
           echo 'Staging homepage did not expose the expected SEO markers after cache-busted retries.'
           exit 1
