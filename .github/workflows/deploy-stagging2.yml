@@ -1,4 +1,4 @@
-name: Deploy custom WordPress code to stagging2
+name: Deploy custom WordPress code to staging2
 
 on:
   push:
@@ -9,16 +9,29 @@ permissions:
   contents: read
 
 concurrency:
-  group: ez-itin-stagging2-deploy
+  group: ez-itin-staging2-deploy
   cancel-in-progress: false
 
 jobs:
   deploy:
-    name: Deploy to existing staging only
+    name: Validate and deploy to existing staging only
     runs-on: ubuntu-latest
     steps:
       - name: Check out managed code
         uses: actions/checkout@v4
+
+      - name: Validate managed theme before deployment
+        run: |
+          set -euo pipefail
+          THEME="wp-content/themes/ez-itin-block-theme"
+          test -s "$THEME/functions.php"
+          test -s "$THEME/theme.json"
+          test -s "$THEME/templates/front-page.html"
+          test -s "$THEME/assets/css/design-system.css"
+          find "$THEME" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          test "$(grep -o '<h1' "$THEME/templates/front-page.html" | wc -l)" -eq 1
+          grep -Fq 'ITIN Application Assistance' "$THEME/templates/front-page.html"
+          grep -Fq 'Certifying Acceptance Agent' "$THEME/templates/front-page.html"
 
       - name: Load encrypted SiteGround SSH key into agent
         env:
@@ -96,4 +109,12 @@ jobs:
           set -euo pipefail
           TARGET="${SITEGROUND_STAGING_PATH%/}"
           ssh -p "$SITEGROUND_PORT" -o BatchMode=yes "$SITEGROUND_USER@$SITEGROUND_HOST" \
-            "cd '$TARGET' && wp --info && wp core version && wp option get home && wp option get siteurl && wp theme list && wp plugin list"
+            "cd '$TARGET' && wp --info && wp core version && wp option get home && wp option get siteurl && wp theme list && wp plugin list && wp cache flush && (wp sg purge >/dev/null 2>&1 || true)"
+
+      - name: Verify staging homepage SEO markers
+        run: |
+          set -euo pipefail
+          PAGE_HTML="$(curl --fail --silent --show-error --location --max-time 30 'https://staging2.ez-itin.com/')"
+          printf '%s' "$PAGE_HTML" | grep -Fq 'ITIN Application Assistance'
+          printf '%s' "$PAGE_HTML" | grep -Fq 'Certifying Acceptance Agent'
+          printf '%s' "$PAGE_HTML" | grep -Fq 'application/ld+json'
