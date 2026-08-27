@@ -29,15 +29,14 @@ jobs:
           eval "$(ssh-agent -s)"
           echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          cat > "$RUNNER_TEMP/ezitin-askpass.sh" <<'ASKPASS'
-          #!/usr/bin/env sh
-          printf '%s' "$SITEGROUND_SSH_KEY_PASSPHRASE"
-          ASKPASS
-          chmod 700 "$RUNNER_TEMP/ezitin-askpass.sh"
-          printf '%s' "$SITEGROUND_SSH_KEY" | \
-            DISPLAY=:0 SSH_ASKPASS="$RUNNER_TEMP/ezitin-askpass.sh" \
-            SSH_ASKPASS_REQUIRE=force ssh-add -
-          rm -f "$RUNNER_TEMP/ezitin-askpass.sh"
+          KEY_FILE="$RUNNER_TEMP/ezitin-sg-key"
+          trap 'rm -f "$KEY_FILE"' EXIT
+          umask 077
+          printf '%s\n' "$SITEGROUND_SSH_KEY" > "$KEY_FILE"
+          ssh-keygen -p -P "$SITEGROUND_SSH_KEY_PASSPHRASE" -N "" -f "$KEY_FILE"
+          ssh-add "$KEY_FILE"
+          rm -f "$KEY_FILE"
+          unset SITEGROUND_SSH_KEY SITEGROUND_SSH_KEY_PASSPHRASE
 
       - name: Trust SiteGround host
         env:
