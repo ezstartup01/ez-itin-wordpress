@@ -15,12 +15,13 @@
   --ez-radius-md: 18px;
   --ez-radius-lg: 26px;
   --ez-shadow-soft: 0 18px 48px rgba(19, 52, 91, .09);
+  --ez-font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; overflow-x: hidden; background: var(--ez-white); color: var(--ez-ink); }
-body, button, input, select, textarea { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body, button, input, select, textarea { font-family: var(--ez-font-sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 a { text-underline-offset: .2em; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #f5b942; outline-offset: 4px; }
 section[id] { scroll-margin-top: 7rem; }
@@ -32,13 +33,13 @@ section[id] { scroll-margin-top: 7rem; }
 .ez-site-header { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--ez-line); background: rgba(255,255,255,.98); box-shadow: 0 3px 16px rgba(11,31,58,.035); }
 .admin-bar .ez-site-header { top: 32px; }
 .ez-nav { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 1.5rem; }
-.ez-brand { display: inline-flex; min-width: max-content; align-items: center; gap: .7rem; color: var(--ez-ink); font-family: var(--wp--preset--font-family--display); text-decoration: none; }
+.ez-brand { display: inline-flex; min-width: max-content; align-items: center; gap: .7rem; color: var(--ez-ink); font-family: var(--ez-font-sans); text-decoration: none; }
 .ez-brand:hover { color: var(--ez-ink); }
 .ez-brand-mark { display: grid; width: 2.35rem; height: 2.35rem; flex: 0 0 auto; place-items: center; border-radius: 12px; background: linear-gradient(135deg,var(--ez-blue),var(--ez-teal)); color: var(--ez-white); box-shadow: 0 7px 18px rgba(21,94,239,.22); }
 .ez-brand-mark svg { width: 1.3rem; height: 1.3rem; }
 .ez-brand-copy { display: grid; gap: .05rem; }
 .ez-brand-copy strong { font-size: 1rem; font-weight: 850; letter-spacing: -.025em; line-height: 1.1; }
-.ez-brand-copy small { color: var(--ez-muted); font-family: var(--wp--preset--font-family--body); font-size: .61rem; font-weight: 700; letter-spacing: .035em; line-height: 1.2; text-transform: uppercase; }
+.ez-brand-copy small { color: var(--ez-muted); font-family: var(--ez-font-sans); font-size: .61rem; font-weight: 700; letter-spacing: .035em; line-height: 1.2; text-transform: uppercase; }
 .ez-nav .wp-block-navigation__container { gap: 1.15rem; }
 .ez-nav .wp-block-navigation-item__content { color: var(--ez-navy); font-size: .88rem; font-weight: 720; text-decoration: none; }
 .ez-nav .wp-block-navigation-item__content:hover { color: var(--ez-blue); }
@@ -62,6 +63,7 @@ section[id] { scroll-margin-top: 7rem; }
 /* SEO homepage */
 .ez-home-seo { --hero-copy: 690px; overflow: hidden; color: var(--ez-ink); }
 .ez-home-seo h1, .ez-home-seo h2, .ez-home-seo h3, .ez-home-seo p { margin-top: 0; }
+.ez-home-seo h1, .ez-home-seo h2, .ez-home-seo h3 { font-family: var(--ez-font-sans); }
 .ez-home-seo h2 { font-size: clamp(2rem,3.7vw,3.65rem); line-height: 1.06; letter-spacing: -.05em; }
 .ez-home-seo h3 { letter-spacing: -.025em; }
 .ez-seo-hero { position: relative; isolation: isolate; min-height: 720px; display: grid; align-items: center; overflow: hidden; color: var(--ez-white); background: var(--ez-ink); background-image: radial-gradient(circle at 76% 10%,rgba(77,224,211,.22),transparent 24rem),radial-gradient(circle at 88% 70%,rgba(21,94,239,.32),transparent 27rem),linear-gradient(118deg,#091b32 0%,#12345b 58%,#145bb2 100%); }
@@ -204,9 +206,9 @@ section[id] { scroll-margin-top: 7rem; }
 .ez-seo-faq-intro > p:not(.ez-eyebrow) { max-width: 440px; color: var(--ez-muted); line-height: 1.75; }
 .ez-seo-faqs { border-top: 1px solid #cbd9e8; }
 .ez-seo-faqs details { border-bottom: 1px solid #cbd9e8; }
-.ez-seo-faqs summary { position: relative; padding: 1.25rem 2.4rem 1.25rem 0; color: var(--ez-ink); cursor: pointer; font-family: var(--wp--preset--font-family--display); font-size: .98rem; font-weight: 800; list-style: none; }
+.ez-seo-faqs summary { position: relative; padding: 1.25rem 2.4rem 1.25rem 0; color: var(--ez-ink); cursor: pointer; font-family: var(--ez-font-sans); font-size: .98rem; font-weight: 800; list-style: none; }
 .ez-seo-faqs summary::-webkit-details-marker { display: none; }
-.ez-seo-faqs summary::after { content: "+"; position: absolute; top: 1.12rem; right: .25rem; display: grid; width: 1.7rem; height: 1.7rem; place-items: center; border-radius: 50%; background: var(--ez-white); color: var(--ez-blue); font-family: var(--wp--preset--font-family--body); font-size: 1.1rem; }
+.ez-seo-faqs summary::after { content: "+"; position: absolute; top: 1.12rem; right: .25rem; display: grid; width: 1.7rem; height: 1.7rem; place-items: center; border-radius: 50%; background: var(--ez-white); color: var(--ez-blue); font-family: var(--ez-font-sans); font-size: 1.1rem; }
 .ez-seo-faqs details[open] summary::after { content: "−"; }
 .ez-seo-faqs details p { margin: -.2rem 2.4rem 1.35rem 0; color: var(--ez-muted); font-size: .88rem; line-height: 1.75; }
 .ez-seo-faqs details a { color: var(--ez-blue); font-weight: 700; }
@@ -221,7 +223,7 @@ section[id] { scroll-margin-top: 7rem; }
 /* Footer */
 .ez-site-footer { padding-block: 4rem 1.5rem; background: #07182d; color: #c4d5e7; }
 .ez-footer-grid { display: grid; grid-template-columns: minmax(260px,1.2fr) repeat(3,minmax(130px,.55fr)); gap: 2.5rem; }
-.ez-footer-brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ez-white)!important; font-family: var(--wp--preset--font-family--display); font-weight: 850; text-decoration: none; }
+.ez-footer-brand { display: inline-flex; align-items: center; gap: .65rem; color: var(--ez-white)!important; font-family: var(--ez-font-sans); font-weight: 850; text-decoration: none; }
 .ez-footer-brand .ez-brand-mark { width: 2rem; height: 2rem; }
 .ez-footer-about { max-width: 360px; margin: 1rem 0 0; color: #9eb4ca; font-size: .82rem; line-height: 1.7; }
 .ez-footer-grid h2 { margin: 0 0 .8rem; color: var(--ez-white); font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; }

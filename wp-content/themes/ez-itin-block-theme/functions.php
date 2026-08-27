@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-const EZ_ITIN_THEME_VERSION = '0.2.0';
+const EZ_ITIN_THEME_VERSION = '0.2.1';
 const EZ_ITIN_HOME_TITLE = 'ITIN Application Assistance | Certifying Acceptance Agent';
 const EZ_ITIN_HOME_DESCRIPTION = 'Get ITIN application assistance from an IRS Certifying Acceptance Agent. Form W-7 preparation, passport verification, and guided submission worldwide.';
 
@@ -20,6 +20,21 @@ add_action('wp_enqueue_scripts', static function (): void {
         $version
     );
 });
+
+/**
+ * The block homepage does not use Elementor widgets. Keep Elementor from
+ * adding remote font requests or its frontend runtime to this route.
+ */
+add_filter('elementor/frontend/print_google_fonts', '__return_false');
+add_action('wp_enqueue_scripts', static function (): void {
+    if (!is_front_page()) {
+        return;
+    }
+
+    wp_dequeue_style('elementor-frontend');
+    wp_dequeue_script('elementor-frontend');
+    wp_dequeue_script('elementor-pro-frontend');
+}, 100);
 
 add_action('after_setup_theme', static function (): void {
     add_theme_support('editor-styles');
@@ -98,7 +113,7 @@ function ez_itin_home_faq_entities(): array
 }
 
 /**
- * Add Service and FAQPage entities to Rank Math's existing @graph.
+ * Add the Service entity to Rank Math's existing @graph.
  *
  * @param mixed $data Existing Rank Math graph.
  * @return mixed
@@ -130,16 +145,30 @@ function ez_itin_rank_math_schema($data)
             'availableLanguage' => 'English',
         ],
     ];
-    $data['itin-home-faq'] = [
+    return $data;
+}
+add_filter('rank_math/json_ld', 'ez_itin_rank_math_schema', 99);
+
+/**
+ * Output the FAQPage graph independently. Rank Math can discard FAQ entities
+ * added by a theme filter when no FAQ block is registered with the post.
+ */
+add_action('wp_head', static function (): void {
+    if (!is_front_page() || (!defined('RANK_MATH_VERSION') && !defined('WPSEO_VERSION'))) {
+        return;
+    }
+
+    $home = home_url('/');
+    $schema = [
+        '@context' => 'https://schema.org',
         '@type' => 'FAQPage',
         '@id' => $home . '#faq',
         'url' => $home . '#faq',
         'mainEntity' => ez_itin_home_faq_entities(),
     ];
 
-    return $data;
-}
-add_filter('rank_math/json_ld', 'ez_itin_rank_math_schema', 99);
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
+}, 31);
 
 /**
  * Provide metadata only when neither Rank Math nor Yoast is responsible for it.
