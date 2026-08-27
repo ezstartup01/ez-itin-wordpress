@@ -20,11 +20,24 @@ jobs:
       - name: Check out managed code
         uses: actions/checkout@v4
 
-      - name: Load SiteGround SSH key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SITEGROUND_SSH_KEY }}
-          ssh-passphrase: ${{ secrets.SITEGROUND_SSH_KEY_PASSPHRASE }}
+      - name: Load encrypted SiteGround SSH key into agent
+        env:
+          SITEGROUND_SSH_KEY: ${{ secrets.SITEGROUND_SSH_KEY }}
+          SITEGROUND_SSH_KEY_PASSPHRASE: ${{ secrets.SITEGROUND_SSH_KEY_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          cat > "$RUNNER_TEMP/ezitin-askpass.sh" <<'ASKPASS'
+          #!/usr/bin/env sh
+          printf '%s' "$SITEGROUND_SSH_KEY_PASSPHRASE"
+          ASKPASS
+          chmod 700 "$RUNNER_TEMP/ezitin-askpass.sh"
+          printf '%s' "$SITEGROUND_SSH_KEY" | \
+            DISPLAY=:0 SSH_ASKPASS="$RUNNER_TEMP/ezitin-askpass.sh" \
+            SSH_ASKPASS_REQUIRE=force ssh-add -
+          rm -f "$RUNNER_TEMP/ezitin-askpass.sh"
 
       - name: Trust SiteGround host
         env:
@@ -85,4 +98,3 @@ jobs:
           TARGET="${SITEGROUND_STAGING_PATH%/}"
           ssh -p "$SITEGROUND_PORT" -o BatchMode=yes "$SITEGROUND_USER@$SITEGROUND_HOST" \
             "cd '$TARGET' && wp --info && wp core version && wp option get home && wp option get siteurl && wp theme list && wp plugin list"
-
