@@ -357,3 +357,140 @@ body.home > .wp-site-blocks { margin-block-start: -24px !important; }
   .ez-seo-audience-grid article { min-height: 0; padding: 1.5rem; }
   .ez-seo-audience-grid article > span { width: 3.25rem; height: 3.25rem; }
 }
+
+
+/* Modern SaaS layout system: controlled reading width, unified bento panels, compact rhythm */
+:root {
+  --ez-content: 1060px;
+  --ez-wide: 1160px;
+  --ez-page-gutter: clamp(1.5rem,4vw,3rem);
+  --ez-surface: #ffffff;
+  --ez-canvas: #f5f8fc;
+  --ez-border-soft: #dbe6f1;
+}
+body.home { overflow-x: clip; background: var(--ez-canvas); }
+body.home .wp-site-blocks,
+.ez-home-seo { max-width: 100%; overflow-x: clip; }
+.ez-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-content)); }
+.ez-wide-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-wide)); }
+.ez-home-seo { background: var(--ez-canvas); }
+.ez-home-seo p { overflow-wrap: break-word; }
+.ez-home-seo h1,.ez-home-seo h2,.ez-home-seo h3 { overflow-wrap: normal; }
+.ez-seo-section { padding-block: clamp(4rem,6vw,5.5rem); }
+.ez-seo-section .ez-eyebrow { width: fit-content; padding: .38rem .68rem; border: 1px solid #c8ddf5; border-radius: 999px; background: #eef6ff; color: #155eef; letter-spacing: .105em; }
+.ez-seo-section--navy .ez-eyebrow,
+.ez-seo-section--worldwide .ez-eyebrow { border-color: rgba(77,224,211,.25); background: rgba(77,224,211,.09); color: #72e8de; }
+.ez-seo-heading { grid-template-columns: minmax(0,1fr) minmax(250px,.42fr); gap: clamp(1.5rem,5vw,4rem); }
+.ez-seo-heading h2 { max-width: 700px; }
+.ez-seo-heading > p { max-width: 52ch; font-size: .98rem; line-height: 1.72; }
+.ez-seo-heading--center { max-width: 800px; grid-template-columns: 1fr; justify-items: center; margin-inline: auto; gap: 1rem; text-align: center; }
+.ez-seo-heading--center h2 { max-width: 760px; }
+.ez-seo-heading--center > p { max-width: 64ch; }
+.ez-seo-context { max-width: 68ch; }
+
+/* Hero uses a narrower editorial measure while retaining the full-bleed canvas */
+.ez-seo-hero__grid { grid-template-columns: minmax(0,1.05fr) minmax(350px,.72fr); gap: clamp(2.5rem,5vw,4.5rem); }
+.ez-seo-hero__copy { max-width: 620px; }
+.ez-seo-hero h1 { max-width: 620px; }
+.ez-seo-hero__lede { max-width: 60ch; font-size: 1.08rem; }
+.ez-seo-hero__panel { max-width: 390px; justify-self: end; }
+
+/* White content becomes inset application surfaces instead of full-width legacy bands */
+#services,#process,#documents,#resources { background: transparent; }
+#services > .ez-shell,
+#process > .ez-shell,
+#resources > .ez-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),1100px); padding: clamp(2rem,4vw,3.75rem); border: 1px solid var(--ez-border-soft); border-radius: 32px; background: rgba(255,255,255,.96); box-shadow: 0 24px 70px rgba(16,49,84,.07); }
+#documents .ez-seo-docs-grid { padding: clamp(2rem,4vw,3.75rem); border: 1px solid #cbdcf1; border-radius: 32px; background: linear-gradient(145deg,#edf5ff 0%,#f8fbff 52%,#e8f8f7 100%); box-shadow: 0 22px 60px rgba(16,60,105,.065); }
+
+/* Unified feature matrix: one modern component, not four unrelated cards */
+.ez-seo-card-grid--four { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0; overflow: hidden; border: 1px solid #d7e4f2; border-radius: 26px; background: #d7e4f2; box-shadow: 0 18px 44px rgba(13,58,104,.065); }
+.ez-seo-card { min-height: 210px; border: 0; border-radius: 0; background: #fff; box-shadow: none; transform: none; }
+.ez-seo-card:nth-child(odd) { border-right: 1px solid #d7e4f2; }
+.ez-seo-card:nth-child(-n+2) { border-bottom: 1px solid #d7e4f2; }
+.ez-seo-card:hover { z-index: 1; background: #f9fcff; box-shadow: inset 0 0 0 1px #9fc5ef; transform: none; }
+
+/* Audience becomes a compact bento grid with balanced reading lines */
+.ez-seo-audience-grid { grid-template-columns: repeat(6,minmax(0,1fr)); gap: 1rem; }
+.ez-seo-audience-grid article { grid-column: span 2; min-height: 255px; padding: 1.6rem; }
+.ez-seo-audience-grid article:nth-child(1),
+.ez-seo-audience-grid article:nth-child(2) { grid-column: span 3; min-height: 235px; }
+.ez-seo-audience-grid p { max-width: 46ch; }
+
+/* Dark sections become premium inset product bands */
+#caa,
+#international { width: min(calc(100% - 2rem),1180px); margin-inline: auto; border-radius: 34px; box-shadow: 0 28px 80px rgba(5,29,57,.16); }
+#caa .ez-shell,
+#international .ez-shell { width: min(calc(100% - 5rem),1000px); }
+.ez-seo-caa-copy > p:not(.ez-eyebrow),
+.ez-seo-world-grid > div:first-child > p:not(.ez-eyebrow),
+.ez-seo-process-copy > p:not(.ez-eyebrow),
+.ez-seo-docs-grid > div:first-child > p:not(.ez-eyebrow),
+.ez-seo-faq-intro > p:not(.ez-eyebrow) { max-width: 60ch; }
+
+/* Resource navigation uses a single SaaS command surface */
+.ez-seo-resource-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1px; overflow: hidden; padding: 1px; border-radius: 26px; background: #d7e4f2; }
+.ez-seo-resource-grid a { min-height: 180px; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
+.ez-seo-resource-grid a:hover { z-index: 1; box-shadow: inset 0 0 0 1px #9fc5ef; transform: none; }
+
+/* FAQ and closing CTA retain full-width contrast but use disciplined text measures */
+#faq .ez-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),980px); }
+.ez-seo-faq-grid { grid-template-columns: minmax(260px,.48fr) minmax(0,1fr); gap: clamp(2rem,6vw,5rem); }
+.ez-seo-final-cta { width: min(calc(100% - 2rem),1180px); margin: 0 auto 1rem; border-radius: 34px; box-shadow: 0 26px 70px rgba(21,94,239,.18); }
+.ez-seo-final-cta__inner { width: min(calc(100% - 5rem),1000px); padding-block: clamp(3.25rem,5vw,4.5rem); }
+.ez-seo-final-cta h2 { max-width: 680px; }
+.ez-seo-final-cta p:not(.ez-eyebrow) { max-width: 60ch; }
+
+/* Prevent intrinsic grid widths from forcing horizontal scrolling */
+.ez-seo-hero__grid > *,
+.ez-seo-heading > *,
+.ez-seo-caa-grid > *,
+.ez-seo-process-grid > *,
+.ez-seo-docs-grid > *,
+.ez-seo-world-grid > *,
+.ez-seo-faq-grid > *,
+.ez-seo-card,
+.ez-seo-audience-grid article,
+.ez-seo-resource-grid a { min-width: 0; }
+
+@media (max-width: 900px) {
+  :root { --ez-page-gutter: 1.25rem; }
+  .ez-seo-section { padding-block: 3.75rem; }
+  .ez-seo-heading,
+  .ez-seo-caa-grid,
+  .ez-seo-process-grid,
+  .ez-seo-docs-grid,
+  .ez-seo-world-grid,
+  .ez-seo-faq-grid { grid-template-columns: 1fr; }
+  .ez-seo-heading { gap: 1rem; }
+  .ez-seo-hero__grid { grid-template-columns: 1fr; }
+  .ez-seo-hero__panel { justify-self: center; }
+  .ez-seo-audience-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ez-seo-audience-grid article,
+  .ez-seo-audience-grid article:nth-child(1),
+  .ez-seo-audience-grid article:nth-child(2) { grid-column: span 1; min-height: 0; }
+  #caa .ez-shell,
+  #international .ez-shell,
+  .ez-seo-final-cta__inner { width: min(calc(100% - 3rem),var(--ez-content)); }
+}
+@media (max-width: 700px) {
+  :root { --ez-page-gutter: 1rem; }
+  .ez-seo-section { padding-block: 3rem; }
+  #services > .ez-shell,
+  #process > .ez-shell,
+  #resources > .ez-shell,
+  #documents .ez-seo-docs-grid { padding: 1.35rem; border-radius: 24px; }
+  .ez-seo-card-grid--four,
+  .ez-seo-resource-grid,
+  .ez-seo-audience-grid { grid-template-columns: 1fr; }
+  .ez-seo-card { min-height: 0; border-right: 0!important; border-bottom: 1px solid #d7e4f2; }
+  .ez-seo-card:last-child { border-bottom: 0; }
+  .ez-seo-resource-grid a { min-height: 150px; }
+  #caa,
+  #international,
+  .ez-seo-final-cta { width: calc(100% - 1rem); border-radius: 24px; }
+  #caa .ez-shell,
+  #international .ez-shell,
+  .ez-seo-final-cta__inner { width: calc(100% - 2.5rem); }
+  .ez-seo-heading--center { text-align: left; justify-items: start; }
+  .ez-seo-jump__inner { padding-inline: .25rem; }
+}
