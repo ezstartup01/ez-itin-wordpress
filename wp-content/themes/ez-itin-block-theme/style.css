@@ -1,0 +1,12 @@
+/*
+Theme Name: EZ-ITIN Block Theme
+Theme URI: https://ez-itin.com/
+Author: EZ-ITIN
+Description: A lightweight, semantic WordPress block theme for EZ-ITIN.
+Version: 0.1.0
+Requires at least: 6.6
+Requires PHP: 8.1
+Text Domain: ez-itin
+*/
+
+@import url("assets/css/design-system.css");
