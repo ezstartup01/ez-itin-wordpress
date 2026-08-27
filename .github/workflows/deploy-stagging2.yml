@@ -115,12 +115,14 @@ jobs:
         run: |
           set -euo pipefail
           for ATTEMPT in 1 2 3 4 5; do
-            PAGE_HTML="$(curl --fail --silent --show-error --location --max-time 30 \
+            PAGE_FILE="$RUNNER_TEMP/staging-home-${ATTEMPT}.html"
+            curl --fail --silent --show-error --location --max-time 30 \
               -H 'Cache-Control: no-cache' \
-              "https://staging2.ez-itin.com/?deploy=${GITHUB_SHA}-${ATTEMPT}")"
-            if printf '%s' "$PAGE_HTML" | grep -Fq 'ITIN Application Assistance' \
-              && printf '%s' "$PAGE_HTML" | grep -Fq 'Certifying Acceptance Agent' \
-              && printf '%s' "$PAGE_HTML" | grep -Fq 'FAQPage'; then
+              --output "$PAGE_FILE" \
+              "https://staging2.ez-itin.com/?deploy=${GITHUB_SHA}-${ATTEMPT}"
+            if grep -Fq 'ITIN Application Assistance' "$PAGE_FILE" \
+              && grep -Fq 'Certifying Acceptance Agent' "$PAGE_FILE" \
+              && grep -Fq 'FAQPage' "$PAGE_FILE"; then
               exit 0
             fi
             sleep 5
