@@ -59,7 +59,7 @@ jobs:
           set -euo pipefail
           mkdir -p "$HOME/.ssh"
           chmod 700 "$HOME/.ssh"
-          ssh-keyscan -p "$SITEGROUND_PORT" "$SITEGROUND_HOST" >> "$HOME/.ssh/known_hosts"
+          ssh-keyscan -4 -T 30 -t rsa,ecdsa,ed25519 -p "$SITEGROUND_PORT" "$SITEGROUND_HOST" >> "$HOME/.ssh/known_hosts"
           chmod 600 "$HOME/.ssh/known_hosts"
 
       - name: Validate exact staging target
