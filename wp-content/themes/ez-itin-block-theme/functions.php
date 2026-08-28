@@ -255,3 +255,34 @@ add_action('wp_head', static function (): void {
 add_action('wp_head', static function (): void {
     echo '<style id="ez-itin-frame-layout-fixes">body.home .wp-site-blocks>header+main,body.home main#main-content,.ez-managed-route .wp-site-blocks>header+main,.ez-managed-route main#main-content{margin-block-start:0!important}@media(min-width:901px){.ez-seo-audience-grid article,.ez-seo-audience-grid article:nth-child(1),.ez-seo-audience-grid article:nth-child(2){grid-column:span 2!important}}</style>' . "\n";
 }, 99);
+
+
+/**
+ * Route approved service CTAs to the EZ Startups client portal.
+ */
+add_filter('the_content', static function (string $content): string {
+    $portal_url = 'https://portal.ezstartups.co/get-started';
+    $labels = [
+        'Start Application',
+        'Start Your ITIN Application',
+        'Request CAA Assistance',
+        'Request a CAA Review',
+        'Start Your ITIN Review',
+        'Check Your Filing Route',
+        'Get Started',
+        'Order ITIN Service',
+    ];
+
+    return (string) preg_replace_callback(
+        '~<a\\b([^>]*?)href=("|\\\')([^"\\\']*)(\\2)([^>]*)>(.*?)</a>~is',
+        static function (array $match) use ($portal_url, $labels): string {
+            $anchor_text = trim(wp_strip_all_tags(html_entity_decode($match[6], ENT_QUOTES, 'UTF-8')));
+            if (!in_array($anchor_text, $labels, true)) {
+                return $match[0];
+            }
+
+            return '<a' . $match[1] . 'href=' . $match[2] . esc_url($portal_url) . $match[4] . $match[5] . '>' . $match[6] . '</a>';
+        },
+        $content
+    );
+});
