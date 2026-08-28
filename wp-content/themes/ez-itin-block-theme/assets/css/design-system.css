@@ -494,3 +494,179 @@ body.home .wp-site-blocks,
   .ez-seo-heading--center { text-align: left; justify-items: start; }
   .ez-seo-jump__inner { padding-inline: .25rem; }
 }
+
+/* Full-width SaaS correction: preserve breadth while reducing vertical scroll */
+:root {
+  --ez-content: 1240px;
+  --ez-wide: 1320px;
+  --ez-page-gutter: clamp(1rem,2vw,1.5rem);
+}
+.ez-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-content)); }
+.ez-wide-shell { width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-wide)); }
+
+/* Shorter hero and section rhythm */
+.ez-seo-hero { min-height: 620px; }
+.ez-seo-hero__grid {
+  grid-template-columns: minmax(0,1.08fr) minmax(340px,.72fr);
+  gap: clamp(2rem,4vw,4rem);
+  padding-block: clamp(3.25rem,5vw,4.5rem);
+}
+.ez-seo-hero__copy { max-width: 720px; }
+.ez-seo-hero h1 { max-width: 720px; }
+.ez-seo-hero__panel { max-width: 410px; }
+.ez-seo-jump__inner { min-height: 52px; }
+.ez-seo-section { padding-block: clamp(3rem,4vw,3.75rem); }
+.ez-home-seo h2 { font-size: clamp(2rem,3vw,3rem); }
+.ez-seo-heading { gap: clamp(1.25rem,4vw,3.25rem); }
+.ez-seo-heading > p,
+.ez-seo-context { line-height: 1.62; }
+
+/* Restore genuine full-width section bands */
+#services,
+#process,
+#resources { background-color: #fff; }
+#process,
+#resources { background-image: none; }
+#documents { background: linear-gradient(145deg,#edf5ff 0%,#f8fbff 52%,#e8f8f7 100%); }
+#services > .ez-shell,
+#process > .ez-shell,
+#resources > .ez-shell {
+  width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-content));
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#documents .ez-seo-docs-grid {
+  width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-content));
+  margin-inline: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#caa,
+#international,
+.ez-seo-final-cta {
+  width: 100%;
+  margin-inline: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#caa .ez-shell,
+#international .ez-shell,
+#faq .ez-shell,
+.ez-seo-final-cta__inner {
+  width: min(calc(100% - (var(--ez-page-gutter) * 2)),var(--ez-content));
+}
+
+/* Compact, unified feature matrix */
+.ez-seo-card-grid--four { border-radius: 22px; }
+.ez-seo-card {
+  min-height: 168px;
+  grid-template-columns: 3.35rem minmax(0,1fr);
+  gap: 0 1rem;
+  padding: 1.35rem 1.5rem;
+}
+.ez-seo-card__icon {
+  width: 3.35rem;
+  height: 3.35rem;
+  border-radius: 15px;
+}
+.ez-seo-card__icon .ez-icon-svg { width: 1.55rem; height: 1.55rem; }
+.ez-seo-card h3 { margin: .08rem 0 .42rem; font-size: 1.08rem; }
+.ez-seo-card p { font-size: .84rem; line-height: 1.55; }
+
+/* Shorter audience bento cards */
+.ez-seo-audience-grid { gap: .9rem; }
+.ez-seo-audience-grid article,
+.ez-seo-audience-grid article:nth-child(1),
+.ez-seo-audience-grid article:nth-child(2) {
+  min-height: 190px;
+  padding: 1.25rem;
+}
+.ez-seo-audience-grid article > span {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 14px;
+}
+.ez-seo-audience-grid article > span .ez-icon-svg { width: 1.45rem; height: 1.45rem; }
+.ez-seo-audience-grid h3 { margin: .85rem 0 .4rem; font-size: 1.05rem; }
+.ez-seo-audience-grid p { font-size: .82rem; line-height: 1.55; }
+
+/* Denser evidence, process, checklist and international blocks */
+.ez-seo-caa-grid,
+.ez-seo-process-grid,
+.ez-seo-docs-grid,
+.ez-seo-world-grid { gap: clamp(2rem,5vw,5rem); }
+.ez-seo-comparison > div { padding: .68rem 1rem; }
+.ez-seo-comparison > p { padding: .72rem 1rem; }
+.ez-seo-checklist { gap: .5rem; }
+.ez-seo-checklist > div {
+  grid-template-columns: 1.75rem 1fr;
+  gap: .7rem;
+  padding: .7rem .8rem;
+  border-radius: 12px;
+}
+.ez-seo-checklist span { width: 1.5rem; height: 1.5rem; border-radius: 7px; }
+.ez-seo-checklist strong { font-size: .82rem; }
+.ez-seo-checklist p { font-size: .76rem; line-height: 1.45; }
+.ez-seo-world-grid > div:first-child > p:not(.ez-eyebrow) { line-height: 1.62; }
+.ez-seo-regions { gap: .48rem; }
+.ez-seo-regions span { padding: .55rem .72rem; font-size: .7rem; }
+
+/* Resource cards fit in one clean desktop row */
+.ez-seo-resource-grid {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  margin-top: 2rem;
+  border-radius: 22px;
+}
+.ez-seo-resource-grid a {
+  min-height: 154px;
+  padding: 1.15rem 1.2rem;
+}
+.ez-seo-resource-grid h3 { margin: .68rem 0 .34rem; font-size: 1rem; }
+.ez-seo-resource-grid p { font-size: .78rem; line-height: 1.48; }
+.ez-seo-resource-grid b { right: 1rem; bottom: .85rem; width: 2rem; height: 2rem; }
+
+/* Faster FAQ scan and tighter conversion close */
+.ez-seo-faq-grid { gap: clamp(2rem,5vw,4rem); }
+.ez-seo-faqs summary { padding: .9rem 2.35rem .9rem 0; font-size: .94rem; }
+.ez-seo-faqs summary::after { top: .72rem; }
+.ez-seo-faqs details p { margin: -.05rem 2.35rem .95rem 0; font-size: .84rem; line-height: 1.58; }
+.ez-seo-final-cta { margin-bottom: 0; }
+.ez-seo-final-cta__inner { padding-block: clamp(2.6rem,4vw,3.25rem); }
+
+@media (max-width: 900px) {
+  :root { --ez-page-gutter: 1.25rem; }
+  .ez-seo-hero { min-height: auto; }
+  .ez-seo-hero__grid { grid-template-columns: 1fr; padding-block: 3rem; }
+  .ez-seo-section { padding-block: 2.75rem; }
+  .ez-seo-resource-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ez-seo-audience-grid article,
+  .ez-seo-audience-grid article:nth-child(1),
+  .ez-seo-audience-grid article:nth-child(2) { min-height: 0; }
+}
+@media (max-width: 700px) {
+  :root { --ez-page-gutter: 1rem; }
+  .ez-seo-hero__grid { padding-block: 2.5rem; }
+  .ez-seo-section { padding-block: 2.25rem; }
+  #services > .ez-shell,
+  #process > .ez-shell,
+  #resources > .ez-shell,
+  #documents .ez-seo-docs-grid { padding: 0; border-radius: 0; }
+  #caa,
+  #international,
+  .ez-seo-final-cta { width: 100%; border-radius: 0; }
+  #caa .ez-shell,
+  #international .ez-shell,
+  .ez-seo-final-cta__inner { width: min(calc(100% - 2rem),var(--ez-content)); }
+  .ez-seo-card { min-height: 0; padding: 1.2rem; }
+  .ez-seo-audience-grid article { min-height: 0; padding: 1.2rem; }
+  .ez-seo-resource-grid { grid-template-columns: 1fr; }
+  .ez-seo-resource-grid a { min-height: 138px; }
+  .ez-seo-faqs summary { padding-block: .82rem; }
+  .ez-seo-final-cta__inner { padding-block: 2.5rem; }
+}
