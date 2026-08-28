@@ -752,6 +752,31 @@ add_action('wp_head', static function (): void {
 }, 0);
 
 /**
+ * Some SiteGround/Rank Math combinations can restore the core title callback
+ * after the theme removes it. As a final compatibility guard, keep only the
+ * first document title in managed-page HTML.
+ */
+function ez_itin_dedupe_document_title(string $html): string
+{
+    $seen = 0;
+    $filtered = preg_replace_callback(
+        '/<title\b[^>]*>.*?<\/title>/is',
+        static function (array $match) use (&$seen): string {
+            $seen++;
+            return $seen === 1 ? $match[0] : '';
+        },
+        $html
+    );
+    return is_string($filtered) ? $filtered : $html;
+}
+
+add_action('template_redirect', static function (): void {
+    if (ez_itin_is_managed_page()) {
+        ob_start('ez_itin_dedupe_document_title');
+    }
+}, 0);
+
+/**
  * Prevent the staging host from entering search indexes. Production metadata
  * remains indexable when the same theme is promoted to the live domain.
  */
