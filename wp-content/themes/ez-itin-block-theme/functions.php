@@ -79,6 +79,21 @@ add_filter('wpseo_title', 'ez_itin_home_title', 20);
 add_filter('wpseo_metadesc', 'ez_itin_home_description', 20);
 
 /**
+ * Keep the homepage canonical aligned with the active WordPress site URL.
+ *
+ * @param mixed $canonical Existing canonical URL.
+ * @return mixed
+ */
+function ez_itin_home_canonical($canonical)
+{
+    return is_front_page() ? home_url('/') : $canonical;
+}
+
+add_filter('rank_math/frontend/canonical', 'ez_itin_home_canonical', 20);
+add_filter('wpseo_canonical', 'ez_itin_home_canonical', 20);
+
+
+/**
  * FAQ entities shared by Rank Math schema and the no-plugin fallback.
  *
  * @return array<int, array<string, mixed>>
