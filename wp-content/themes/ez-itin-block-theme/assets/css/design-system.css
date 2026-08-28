@@ -670,3 +670,163 @@ body.home .wp-site-blocks,
   .ez-seo-faqs summary { padding-block: .82rem; }
   .ez-seo-final-cta__inner { padding-block: 2.5rem; }
 }
+
+/* Emerald Fintech theme: accessible long-form typography and premium CAA styling */
+:root {
+  --ez-ink: #0b1f33;
+  --ez-navy: #073b3a;
+  --ez-blue: #0a9f83;
+  --ez-blue-dark: #087966;
+  --ez-teal: #4de0c4;
+  --ez-paper: #f6faf8;
+  --ez-blue-soft: #e8f7f2;
+  --ez-line: #d8e8e2;
+  --ez-muted: #4f6762;
+  --ez-shadow-soft: 0 18px 48px rgba(7,59,58,.09);
+}
+body.home { background: #f6faf8; }
+body.home .ez-home-seo { font-size: 16px; }
+.ez-site-header { border-color: #d8e8e2; box-shadow: 0 3px 16px rgba(7,59,58,.045); }
+.ez-brand-mark { background: linear-gradient(135deg,#073b3a,#0a9f83 62%,#4de0c4); box-shadow: 0 7px 18px rgba(10,159,131,.2); }
+.ez-nav .wp-block-navigation-item__content:hover { color: #0a9f83; }
+.ez-nav .ez-nav-cta .wp-block-navigation-item__content { background: #0a9f83; }
+.ez-nav .ez-nav-cta .wp-block-navigation-item__content:hover { background: #087966; }
+
+/* Emerald application hero */
+.ez-seo-hero {
+  background: #073b3a;
+  background-image:
+    radial-gradient(circle at 77% 8%,rgba(77,224,196,.18),transparent 24rem),
+    radial-gradient(circle at 91% 76%,rgba(10,159,131,.28),transparent 27rem),
+    linear-gradient(118deg,#061f25 0%,#073b3a 54%,#0d665b 100%);
+}
+.ez-seo-hero::before {
+  opacity: .12;
+  background-image: linear-gradient(rgba(255,255,255,.17) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.17) 1px,transparent 1px);
+}
+.ez-seo-hero__lede { color: #d8eee8; font-size: clamp(1.08rem,1.4vw,1.2rem); line-height: 1.65; }
+.ez-seo-hero__proof { color: #bfdbd4; font-size: .82rem; }
+.ez-seo-button--primary { background: #4de0c4; color: #062d2a; box-shadow: 0 12px 28px rgba(77,224,196,.18); }
+.ez-seo-button--primary:hover { background: #72ead2; color: #062d2a; box-shadow: 0 15px 32px rgba(77,224,196,.24); }
+.ez-seo-button--secondary:hover { border-color: #4de0c4; background: rgba(77,224,196,.1); }
+.ez-seo-panel__top { background: #0b1f33; }
+.ez-seo-panel__progress span { background: linear-gradient(90deg,#0a9f83,#4de0c4); }
+.ez-seo-panel__item.is-complete > span { background: #dcf8f1; color: #087966; }
+.ez-seo-panel__item.is-complete > b { color: #087966; }
+.ez-seo-panel__item.is-active { border-color: #a8dacf; box-shadow: 0 7px 18px rgba(10,159,131,.09); }
+.ez-seo-panel__item.is-active > span { background: #e8f7f2; color: #0a9f83; }
+.ez-seo-panel__item.is-active > b { color: #0a9f83; }
+.ez-seo-panel__note { background: #e8f7f2; }
+.ez-seo-panel__note > span { background: #0a9f83; }
+.ez-seo-panel__note p { color: #3b625b; }
+.ez-seo-panel__note strong { color: #073b3a; }
+
+/* Readable SEO copy: comfortable without returning to excessive section height */
+.ez-seo-heading > p,
+.ez-seo-context,
+.ez-seo-caa-copy > p:not(.ez-eyebrow),
+.ez-seo-process-copy > p:not(.ez-eyebrow),
+.ez-seo-docs-grid > div:first-child > p:not(.ez-eyebrow),
+.ez-seo-world-grid > div:first-child > p:not(.ez-eyebrow),
+.ez-seo-faq-intro > p:not(.ez-eyebrow) { font-size: 1rem; line-height: 1.65; }
+.ez-seo-card h3 { font-size: 1.12rem; }
+.ez-seo-card p { font-size: .92rem; line-height: 1.58; }
+.ez-seo-audience-grid h3 { font-size: 1.08rem; }
+.ez-seo-audience-grid p { font-size: .9rem; line-height: 1.58; }
+.ez-seo-process h3 { font-size: 1.1rem; }
+.ez-seo-process p { font-size: .93rem; line-height: 1.58; }
+.ez-seo-comparison > div span { color: #c6ddd7; font-size: .84rem; line-height: 1.45; }
+.ez-seo-comparison > div b { font-size: .8rem; }
+.ez-seo-comparison__head span,
+.ez-seo-comparison__head strong { font-size: .76rem!important; }
+.ez-seo-comparison > p { color: #a8c7bf; font-size: .78rem; }
+.ez-seo-checklist strong { font-size: .88rem; }
+.ez-seo-checklist p { color: #4f6762; font-size: .84rem; line-height: 1.5; }
+.ez-seo-regions span { font-size: .76rem; }
+.ez-seo-resource-grid h3 { font-size: 1.05rem; }
+.ez-seo-resource-grid p { font-size: .86rem; line-height: 1.55; }
+.ez-seo-faqs summary { font-size: 1rem; line-height: 1.45; }
+.ez-seo-faqs details p { font-size: .92rem; line-height: 1.62; }
+.ez-seo-final-cta p:not(.ez-eyebrow) { font-size: 1rem; }
+
+/* Emerald full-width section surfaces */
+#services {
+  background:
+    radial-gradient(circle at 92% 8%,rgba(77,224,196,.12),transparent 28rem),
+    linear-gradient(180deg,#fff 0%,#f5fbf8 100%);
+}
+#services::before {
+  border-color: rgba(10,159,131,.1);
+  box-shadow: 0 0 0 4rem rgba(10,159,131,.025),0 0 0 8rem rgba(77,224,196,.02);
+}
+#who-we-help {
+  background: radial-gradient(circle at 0 42%,rgba(10,159,131,.08),transparent 26rem),#edf7f3;
+}
+#who-we-help::after { background-image: radial-gradient(#74b9aa 1.2px,transparent 1.2px); }
+#documents { background: linear-gradient(145deg,#e8f7f2 0%,#f8fcfa 52%,#e3f4ef 100%); }
+#caa { background: linear-gradient(112deg,#062b31 0%,#073b3a 56%,#0b1f33 100%); }
+#international { background: linear-gradient(118deg,#061f25 0%,#073b3a 54%,#0d665b 125%); }
+.ez-seo-final-cta { background: linear-gradient(118deg,#0a9f83 0%,#078873 55%,#0d665b 120%); }
+
+/* Consistent emerald feature and audience icons */
+.ez-seo-card-grid--four { border-color: #d5e6e1; background: #d5e6e1; box-shadow: 0 18px 44px rgba(7,59,58,.065); }
+.ez-seo-card { border-color: #d5e6e1; }
+.ez-seo-card:nth-child(odd) { border-right-color: #d5e6e1; }
+.ez-seo-card:nth-child(-n+2) { border-bottom-color: #d5e6e1; }
+.ez-seo-card:hover { background: #f8fcfa; box-shadow: inset 0 0 0 1px #8fcbbb; }
+.ez-seo-card__icon,
+.ez-seo-card:nth-child(2) .ez-seo-card__icon,
+.ez-seo-card:nth-child(3) .ez-seo-card__icon,
+.ez-seo-card:nth-child(4) .ez-seo-card__icon {
+  border-color: #b9ddd4;
+  background: linear-gradient(145deg,#edfaf6,#d9f3ec);
+  color: #087966;
+  box-shadow: inset 0 1px 0 #fff;
+}
+.ez-seo-card::after { background: radial-gradient(circle,rgba(77,224,196,.12),transparent 68%); }
+.ez-seo-audience-grid article {
+  border-color: #d3e5df;
+  box-shadow: 0 15px 38px rgba(7,59,58,.065);
+}
+.ez-seo-audience-grid article::before { background: linear-gradient(90deg,#0a9f83,#4de0c4); }
+.ez-seo-audience-grid article:hover { box-shadow: 0 22px 48px rgba(7,59,58,.11); }
+.ez-seo-audience-grid article > span,
+.ez-seo-audience-grid article:nth-child(2) > span,
+.ez-seo-audience-grid article:nth-child(3) > span,
+.ez-seo-audience-grid article:nth-child(5) > span,
+.ez-seo-audience-grid article:nth-child(6) > span {
+  border-color: #b9ddd4;
+  background: linear-gradient(145deg,#edfaf6,#d9f3ec);
+  color: #087966;
+  box-shadow: 0 8px 20px rgba(10,159,131,.1);
+}
+
+/* Emerald process, documents, resources and FAQ */
+.ez-seo-process li:not(:last-child)::after { background: #a8d5c9; }
+.ez-seo-process li > span { border-color: #a8d5c9; color: #0a9f83; }
+.ez-seo-checklist > div { border-color: #bfded5; }
+.ez-seo-checklist span { background: #4de0c4; color: #073b3a; }
+.ez-seo-resource-grid { background: #d5e6e1; }
+.ez-seo-resource-grid a { background: linear-gradient(155deg,#fff 55%,#edf8f4); }
+.ez-seo-resource-grid a::before { background: rgba(10,159,131,.06); }
+.ez-seo-resource-grid a:hover { box-shadow: inset 0 0 0 1px #8fcbbb; }
+.ez-seo-resource-grid b { background: #e1f5ef; }
+.ez-seo-faqs,
+.ez-seo-faqs details { border-color: #c8ddd7; }
+.ez-seo-faqs summary::after { color: #0a9f83; }
+
+@media (max-width: 700px) {
+  body.home .ez-home-seo { font-size: 16px; }
+  .ez-seo-card p,
+  .ez-seo-audience-grid p,
+  .ez-seo-process p,
+  .ez-seo-resource-grid p,
+  .ez-seo-faqs details p { font-size: .9rem; }
+  .ez-seo-heading > p,
+  .ez-seo-context,
+  .ez-seo-caa-copy > p:not(.ez-eyebrow),
+  .ez-seo-process-copy > p:not(.ez-eyebrow),
+  .ez-seo-docs-grid > div:first-child > p:not(.ez-eyebrow),
+  .ez-seo-world-grid > div:first-child > p:not(.ez-eyebrow),
+  .ez-seo-faq-intro > p:not(.ez-eyebrow) { font-size: .96rem; line-height: 1.62; }
+}
