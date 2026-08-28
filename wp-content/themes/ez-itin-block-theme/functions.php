@@ -246,3 +246,12 @@ add_action('wp_head', static function (): void {
 
     echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
 }, 30);
+
+
+/**
+ * Keep the first page hero flush with the sticky header even when a CSS
+ * optimizer serves an older combined asset.
+ */
+add_action('wp_head', static function (): void {
+    echo '<style id="ez-itin-header-hero-gap-fix">body.home .wp-site-blocks>header+main,body.home main#main-content,.ez-managed-route .wp-site-blocks>header+main,.ez-managed-route main#main-content{margin-block-start:0!important}</style>' . "\n";
+}, 99);
