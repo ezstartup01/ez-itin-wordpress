@@ -1026,3 +1026,25 @@ body.home { background: #f6f9fc; }
 }
 .ez-seo-final-cta .ez-seo-button--light:hover { color: #005eff; }
 .ez-site-footer { background: #0a0e27; }
+
+/* Dark-header navigation contrast, including the responsive menu */
+.ez-site-header .ez-nav .wp-block-navigation-item__content {
+  color: #e2e8f0 !important;
+}
+.ez-site-header .ez-nav .wp-block-navigation-item__content:hover {
+  color: #22d3ee !important;
+}
+.ez-site-header .ez-nav .ez-nav-cta .wp-block-navigation-item__content {
+  color: #005eff !important;
+}
+.ez-site-header .ez-nav .ez-nav-cta .wp-block-navigation-item__content:hover {
+  color: #004bd8 !important;
+}
+.ez-site-header .wp-block-navigation__responsive-container-open,
+.ez-site-header .wp-block-navigation__responsive-container-close { color: #fff; }
+@media (max-width: 700px) {
+  .ez-site-header .wp-block-navigation__responsive-container.is-menu-open {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+  }
+}
