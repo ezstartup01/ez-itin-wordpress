@@ -830,3 +830,19 @@ body.home .ez-home-seo { font-size: 16px; }
   .ez-seo-world-grid > div:first-child > p:not(.ez-eyebrow),
   .ez-seo-faq-intro > p:not(.ez-eyebrow) { font-size: .96rem; line-height: 1.62; }
 }
+
+/* Supporting SEO copy remains comfortably readable across dense SaaS cards */
+.ez-seo-card p { font-size: .96rem; }
+.ez-seo-audience-grid p { font-size: .95rem; }
+.ez-seo-process p { font-size: .95rem; }
+.ez-seo-checklist p { font-size: .9rem; }
+.ez-seo-resource-grid p { font-size: .92rem; }
+.ez-seo-faqs details p { font-size: .96rem; }
+@media (max-width: 700px) {
+  .ez-seo-card p,
+  .ez-seo-audience-grid p,
+  .ez-seo-process p,
+  .ez-seo-checklist p,
+  .ez-seo-resource-grid p,
+  .ez-seo-faqs details p { font-size: .94rem; }
+}
