@@ -5,7 +5,12 @@
 
 declare(strict_types=1);
 
-const EZ_ITIN_THEME_VERSION = '0.2.1';
+$managed_pages_file = get_theme_file_path('inc/managed-pages.php');
+if (is_readable($managed_pages_file)) {
+    require_once $managed_pages_file;
+}
+
+const EZ_ITIN_THEME_VERSION = '0.3.0';
 const EZ_ITIN_HOME_TITLE = 'ITIN Application Assistance | Certifying Acceptance Agent';
 const EZ_ITIN_HOME_DESCRIPTION = 'Get ITIN application assistance from an IRS Certifying Acceptance Agent. Form W-7 preparation, passport verification, and guided submission worldwide.';
 
