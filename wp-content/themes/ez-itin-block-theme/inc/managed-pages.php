@@ -745,11 +745,11 @@ add_filter('wpseo_canonical', 'ez_itin_managed_canonical', 25);
  * core from adding a second title; the no-plugin fallback below owns the tag
  * when neither supported plugin is active.
  */
-add_action('wp', static function (): void {
+add_action('wp_head', static function (): void {
     if (ez_itin_is_managed_page()) {
         remove_action('wp_head', '_wp_render_title_tag', 1);
     }
-});
+}, 0);
 
 /**
  * Prevent the staging host from entering search indexes. Production metadata
