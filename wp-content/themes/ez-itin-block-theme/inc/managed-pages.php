@@ -741,6 +741,16 @@ add_filter('wpseo_metadesc', 'ez_itin_managed_description', 25);
 add_filter('wpseo_canonical', 'ez_itin_managed_canonical', 25);
 
 /**
+ * Rank Math renders the managed title itself on this block theme. Prevent the
+ * core title-tag callback from adding a second, identical <title> element.
+ */
+add_action('wp', static function (): void {
+    if (ez_itin_is_managed_page() && defined('RANK_MATH_VERSION')) {
+        remove_action('wp_head', '_wp_render_title_tag', 1);
+    }
+});
+
+/**
  * Prevent the staging host from entering search indexes. Production metadata
  * remains indexable when the same theme is promoted to the live domain.
  */
