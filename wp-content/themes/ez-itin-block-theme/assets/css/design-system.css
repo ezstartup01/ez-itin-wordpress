@@ -1502,6 +1502,9 @@ body,
   background: #e8f1ff;
   color: #005eff;
 }
+.ez-mp-status--service strong { font-size: clamp(1.35rem,2vw,1.85rem); line-height: 1.18; }
+.ez-mp-status--service > small { display: block; margin-top: .75rem; color: #526983; line-height: 1.55; }
+.ez-mp-status--service hr { width: 100%; margin: 1.15rem 0; border: 0; border-top: 1px solid #d7e3f0; }
 .ez-mp-band { background: #edf2fb; }
 .ez-mp-metrics strong { color: #0f9f78; }
 .ez-mp-section--paper { background: #f7fafd; }
@@ -1553,6 +1556,24 @@ body,
 .ez-mp-cta h2 { color: #0a2540; }
 .ez-mp-cta p:not(.ez-mp-kicker) { color: #425466; }
 .ez-mp-cta .ez-mp-kicker { color: #0f9f78; }
+.ez-mp-inline-cta {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.4rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid #c6e7de;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#fff,#e7f8f3);
+  box-shadow: 0 14px 34px rgba(10,37,64,.055);
+}
+.ez-mp-inline-cta strong,
+.ez-mp-inline-cta span { display: block; }
+.ez-mp-inline-cta strong { color: #0a2540; font-size: 1rem; }
+.ez-mp-inline-cta span { margin-top: .25rem; color: #526983; font-size: .88rem; line-height: 1.5; }
+.ez-mp-cta__actions { display: grid; justify-items: center; gap: .8rem; }
+.ez-mp-cta__actions .ez-mp-link { font-size: .82rem; }
 
 /* Emerald verification accents throughout */
 .ez-seo-checklist span,
@@ -1581,6 +1602,13 @@ body,
   .ez-site-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
     color: #0a2540 !important;
   }
+}
+
+@media (max-width: 760px) {
+  .ez-mp-inline-cta { grid-template-columns: 1fr; }
+  .ez-mp-inline-cta .ez-mp-button { width: 100%; }
+  .ez-mp-cta__actions { justify-items: stretch; }
+  .ez-mp-cta__actions .ez-mp-link { text-align: center; }
 }
 
 
