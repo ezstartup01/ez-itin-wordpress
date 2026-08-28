@@ -741,11 +741,12 @@ add_filter('wpseo_metadesc', 'ez_itin_managed_description', 25);
 add_filter('wpseo_canonical', 'ez_itin_managed_canonical', 25);
 
 /**
- * Rank Math renders the managed title itself on this block theme. Prevent the
- * core title-tag callback from adding a second, identical <title> element.
+ * SEO plugins render the managed title themselves on this block theme. Keep
+ * core from adding a second title; the no-plugin fallback below owns the tag
+ * when neither supported plugin is active.
  */
 add_action('wp', static function (): void {
-    if (ez_itin_is_managed_page() && defined('RANK_MATH_VERSION')) {
+    if (ez_itin_is_managed_page()) {
         remove_action('wp_head', '_wp_render_title_tag', 1);
     }
 });
@@ -875,6 +876,7 @@ add_action('wp_head', static function (): void {
     }
     $page = ez_itin_managed_pages()[$key];
     $url = home_url('/' . trailingslashit($key));
+    echo '<title>' . esc_html($page['title']) . '</title>' . "\n";
     echo '<meta name="description" content="' . esc_attr($page['description']) . '">' . "\n";
     echo '<link rel="canonical" href="' . esc_url($url) . '">' . "\n";
     echo '<meta property="og:type" content="website">' . "\n";
