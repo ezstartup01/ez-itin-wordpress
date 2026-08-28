@@ -253,5 +253,5 @@ add_action('wp_head', static function (): void {
  * optimizer serves an older combined asset.
  */
 add_action('wp_head', static function (): void {
-    echo '<style id="ez-itin-header-hero-gap-fix">body.home .wp-site-blocks>header+main,body.home main#main-content,.ez-managed-route .wp-site-blocks>header+main,.ez-managed-route main#main-content{margin-block-start:0!important}</style>' . "\n";
+    echo '<style id="ez-itin-frame-layout-fixes">body.home .wp-site-blocks>header+main,body.home main#main-content,.ez-managed-route .wp-site-blocks>header+main,.ez-managed-route main#main-content{margin-block-start:0!important}@media(min-width:901px){.ez-seo-audience-grid article,.ez-seo-audience-grid article:nth-child(1),.ez-seo-audience-grid article:nth-child(2){grid-column:span 2!important}}</style>' . "\n";
 }, 99);

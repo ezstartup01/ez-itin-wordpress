@@ -654,8 +654,6 @@ body.home .ez-home-seo { font-size: 16px; }
   background: rgba(255,255,255,.97);
   box-shadow: 0 15px 38px rgba(10,37,64,.06);
 }
-.ez-seo-audience-grid article:nth-child(1),
-.ez-seo-audience-grid article:nth-child(2) { grid-column: span 3; }
 .ez-seo-audience-grid article::before { background: linear-gradient(90deg,#005eff,#22d3ee); }
 .ez-seo-audience-grid article:hover { box-shadow: 0 22px 48px rgba(10,37,64,.1); }
 .ez-seo-audience-grid article > span,
